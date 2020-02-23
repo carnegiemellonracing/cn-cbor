@@ -8,7 +8,6 @@ extern "C" {
 } /* Duh. */
 #endif
 
-#include <arpa/inet.h>
 #include <string.h>
 #include <strings.h>
 #include <stdbool.h>
@@ -18,8 +17,8 @@ extern "C" {
 #include "cbor.h"
 
 #define hton8p(p) (*(uint8_t*)(p))
-#define hton16p(p) (htons(*(uint16_t*)(p)))
-#define hton32p(p) (htonl(*(uint32_t*)(p)))
+#define hton16p(p) ((*(uint16_t*)(p)))
+#define hton32p(p) ((*(uint32_t*)(p)))
 static uint64_t hton64p(const uint8_t *p) {
   /* TODO: does this work on both BE and LE systems? */
   uint64_t ret = hton32p(p);
