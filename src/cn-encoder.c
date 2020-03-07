@@ -17,8 +17,23 @@ extern "C" {
 #include "cbor.h"
 
 #define hton8p(p) (*(uint8_t*)(p))
-#define hton16p(p) ((*(uint16_t*)(p)))
-#define hton32p(p) ((*(uint32_t*)(p)))
+#define htons(n) (((((unsigned short)(n) & 0xFF)) << 8) | (((unsigned short)(n) & 0xFF00) >> 8))
+
+#define htonl(n) (((((unsigned long)(n) & 0xFF)) << 24) | \
+                  ((((unsigned long)(n) & 0xFF00)) << 8) | \
+                  ((((unsigned long)(n) & 0xFF0000)) >> 8) | \
+                  ((((unsigned long)(n) & 0xFF000000)) >> 24))
+
+uint16_t hton16p(const void *in) {
+  uint16_t n = *(uint16_t *) in;
+  return htons(n);
+}
+
+uint32_t hton32p(const void *in) {
+  uint32_t n = *(uint32_t *) in;
+  return htonl(n);
+}
+
 static uint64_t hton64p(const uint8_t *p) {
   /* TODO: does this work on both BE and LE systems? */
   uint64_t ret = hton32p(p);

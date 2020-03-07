@@ -50,9 +50,11 @@ static double decode_half(int half) {
 
 #define ntoh8p(p) (*(unsigned char*)(p))
 
-/* Hack around inet depend */
-#define ntohs(short) (short)
-#define ntohl(word) (word)
+#define ntohs(n) (((((unsigned short)(n) & 0xFF)) << 8) | (((unsigned short)(n) & 0xFF00) >> 8))
+#define ntohl(n) (((((unsigned long)(n) & 0xFF)) << 24) | \
+                  ((((unsigned long)(n) & 0xFF00)) << 8) | \
+                  ((((unsigned long)(n) & 0xFF0000)) >> 8) | \
+                  ((((unsigned long)(n) & 0xFF000000)) >> 24))
 
 static uint16_t ntoh16p(unsigned char *p) {
     uint16_t tmp;
