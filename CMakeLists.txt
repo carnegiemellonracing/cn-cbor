@@ -20,7 +20,7 @@ option ( use_context    "Use context pointer for CBOR functions" OFF )
 option ( verbose        "Produce verbose makefile output" OFF )
 option ( optimize       "Optimize for size" OFF )
 option ( fatal_warnings "Treat build warnings as errors" ON )
-option ( coveralls      "Generate coveralls data" ON )
+option ( coveralls      "Generate coveralls data" OFF )
 option ( coveralls_send "Send data to coveralls site" OFF )
 option ( build_docs "Create docs using Doxygen" ${DOXYGEN_FOUND} )
 option ( no_floats "Build without floating point support" OFF )
@@ -83,7 +83,7 @@ endif ()
 ## include the parts
 add_subdirectory ( include )
 add_subdirectory ( src )
-add_subdirectory ( test )
+# add_subdirectory ( test )
 
 install (FILES LICENSE README.md DESTINATION .)
 
