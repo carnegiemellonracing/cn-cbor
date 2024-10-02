@@ -3,7 +3,7 @@
 # top level build file for cn-cbor
 
 ## prepare CMAKE
-cmake_minimum_required ( VERSION 3.0.0 )
+cmake_minimum_required ( VERSION 3.5.0 )
 
 set ( VERSION_MAJOR 0   CACHE STRING "Project major version number")
 set ( VERSION_MINOR "1" CACHE STRING "Project minor version number" )
@@ -22,6 +22,7 @@ option ( optimize       "Optimize for size" OFF )
 option ( fatal_warnings "Treat build warnings as errors" ON )
 option ( coveralls      "Generate coveralls data" OFF )
 option ( coveralls_send "Send data to coveralls site" OFF )
+option ( build_tests    "Build tests" OFF )
 option ( build_docs "Create docs using Doxygen" ${DOXYGEN_FOUND} )
 option ( no_floats "Build without floating point support" OFF )
 option ( align_reads    "Use memcpy in ntoh*p()" OFF )
@@ -83,7 +84,9 @@ endif ()
 ## include the parts
 add_subdirectory ( include )
 add_subdirectory ( src )
-# add_subdirectory ( test )
+if ( build_tests )
+    add_subdirectory ( test )
+endif()
 
 install (FILES LICENSE README.md DESTINATION .)
 
