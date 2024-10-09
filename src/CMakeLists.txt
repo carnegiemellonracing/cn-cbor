@@ -16,7 +16,7 @@ endif()
 if (use_context)
   add_definitions(-DUSE_CBOR_CONTEXT)
 endif()
-add_library ( cn-cbor SHARED ${cbor_srcs} )
+add_library ( cn-cbor STATIC ${cbor_srcs} )
 target_include_directories ( cn-cbor PUBLIC ../include )
 target_include_directories ( cn-cbor PRIVATE ../src )
 
